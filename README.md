@@ -2,7 +2,7 @@
 
 ## O que é?
 
-O problema da dieta, é um exemplo de **PPl, ou seja, de um Problema de Programação Linear,** o qual consiste em minimizar uma função linear(seja ela de custo, caloria, etc) sujeita a diversas restrições lineares e com variáveis não negativas.  
+O problema da dieta, é um exemplo de **PPL, ou seja, de um Problema de Programação Linear,** o qual consiste em minimizar uma função linear(seja ela de custo, caloria, etc) sujeita a diversas restrições lineares e com variáveis não negativas.  
 Neste trabalho utilizaremos o caso de Maria, baseado no PDF ao final do texto. Após receber recomendações nutricionais, ela precisa seguir restrições que garantam uma quantidade mínima de nutrientes, ao mesmo tempo em que **deseja minimizar o custo total de sua dieta**. Em outras abordagens, também analisaremos a ingestão calórica e uma dieta com baixa ingestão de sódio
 
 ### Abordagens
@@ -34,7 +34,7 @@ As abordagens serão:
 
 ## Como isso será feito?
 
-Inicialmente, vamos formalizar nosso PPl
+Inicialmente, vamos formalizar nosso PPL
 
 **<div align="center">Minimizar Z = cTx</div>**
 
