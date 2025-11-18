@@ -95,7 +95,86 @@ Agora, com tudo formalizado, vamos partir para a resolução de problema e suas 
 
 ## 1. Abordagem
 
-....a fazer
+Nesta abordagem, Maria quer montar uma dieta de menor custo possível, desde que atenda às quantidades mínimas de nutrientes recomendadas. O objetivo é descobrir quanto ela vai gastar e quantas porções de cada alimento são necessárias para atender esses requisitos.
+
+A função objetivo usada para minimizar o custo é:
+Min Custo =
+0,93𝑥₁ + 5,24𝑥₂ + 1,29𝑥₃ + 3,05𝑥₄ + 0,50𝑥₅ + 0,63𝑥₆ + 0,09𝑥₇ + 0,89𝑥₈+1,95𝑥₉ + 0,21𝑥₁₀ + 0,99𝑥₁₁ + 0,61𝑥₁₂ + 1,69𝑥₁₃
+E, entre as restrições, temos a exigência de energia mínima:
+Calorias mínimas:
+136𝑥₁ + 85𝑥₂ + 45𝑥₃ + 100𝑥₄ + 25𝑥₅ + 132𝑥₆ + 25𝑥₇ + 165𝑥₈+72𝑥₉ + 68𝑥₁₀ + 77𝑥₁₁ + 17𝑥₁₂ + 99𝑥₁₃ ≥ 1870
+
+Além disso, as demais restrições mínimas iniciais. como proteína, vitaminas, cálcio, ferro e sódio também são incluídas no modelo.
+Com a ajuda das bibliotecas pandas e PuLP, os dados da tabela são carregados, as variáveis são criadas e o problema de otimização é resolvido pelo método Simplex, buscando sempre o menor custo que ainda satisfaça todos os limites impostos.
+
+### 1.1 Primeiro resultado
+
+Compilando e executando o código com as restrições percebemos que o resultado é:
+
+| Alimentos       | Porção Ideal | Quantidade Total (g) |
+| --------------- | ------------ | -------------------- |
+| Pão Integral    | 12.33        | 641.16               |
+| Queijo Cottage  | 0.000000     | 0.000000             |
+| Mamão           | 0.000000     | 0.000000             |
+| Nozes           | 0.000000     | 0.000000             |
+| Salada Crua     | 0.79         | 79                   |
+| Feijão          | 0.000000     | 0.000000             |
+| Arroz Integral  | 0.000000     | 0.000000             |
+| Frango Grelhado | 0.000000     | 0.000000             |
+| Maçã            | 0.000000     | 0.000000             |
+| Tapioca         | 0.000000     | 0.000000             |
+| Ovo             | 0.000000     | 0.000000             |
+| Atum Ralado     | 0.0000       | 0.000000             |
+| Iogurte         | 1.74         | 174                  |
+
+O modelo recomendou 12,33 porções de pão integral, o que já estoura totalmente qualquer consumo humano aceitável para um único dia.
+Apesar do custo ser baixo (R$ 14,81), essa solução não é nutricionalmente adequada, pois concentra praticamente toda a dieta em pão — ignorando o equilíbrio alimentar e levando a um excesso absurdo de carboidratos.
+
+Por isso, fica claro que é necessário adicionar restrições de porções máximas por grupo alimentar antes de buscar uma solução saudável e realista.
+
+
+### 1.2 Segundo resultado
+
+Para que Maria consiga uma dieta com menor custo possível e uma quantidade mínima de nutrientes, deve-se restringir as variáveis à quantidade máxima de porções diária e utilizar as restrições dos nutrientes cálcio, sódio e ferro como menor igual.
+
+### **As novas restrições adicionadas:**
+**Frutas: No máximo 1 porção**
+⇒ x3 + x9 <= 1
+**Leite e Derivados: No máximo 1 porção**
+⇒x2 + x13 <=1
+**Proteínas (Carne, PVT, Ovo): No máximo 1 porção**
+⇒ x8 + x11 + x13 <=1
+**Cereais: No máximo 1 porção**
+⇒ x1 <=1
+⇒ x7 <=1
+**Leguminosas; Sementes e Oleaginosas; Raízes e Tubérculos: No máximo 1 porção**
+⇒ x6 <=1 
+⇒ x10 <=1
+**Vegetais: Livre**
+⇒ x5>=0
+
+A partir dessas novas restrições, chegamos no resultado:
+
+| Alimento | Porção Ideal | Quantidade Total (g) |
+|------------------|--------------|------------------------|
+| Pão Integral     | 0.000000     | 0.000000 |
+| Queijo Cottage   | 0.0000       | 0.000000 |
+| Mamão            | 0.9805       | 98       |
+| Nozes            | 16.58        | 248.7    |
+| Salada Crua      | 0.00000      | 0.000000 |
+| Feijão           | 0.000000     | 0.000000 |
+| Arroz Integral   | 1.00         | 20       |
+| Frango Grelhado  | 0.00000      | 0.00000  |
+| Maçã             | 0.000000     | 0.000000 |
+| Tapioca          | 0.40         | 8        |
+| Ovo              | 0.000000     | 0.000000 |
+| Atum Ralado      | 0.88         | 17.6     |
+| Iogurte          | 1.00         | 100      |
+
+com um custo de R$54, 26.
+Assim, ao adicionar novas restrições, Maria obteve uma dieta mais equilibrada, com mais variedade de alimentos, com um custo diário minimizado e respeitando as quantidades mínimas de nutrientes.
+
+
 
 ## 2. Abordagem
 
