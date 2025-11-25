@@ -107,3 +107,4 @@ if resultado_problema_7_1.success:
 for i, alimento in enumerate(df['Alimentos']):
     qtd = resultado_problema_7_1.x[i]
     print(f"{alimento:<20}: {qtd:>8.4f} porções")
+
