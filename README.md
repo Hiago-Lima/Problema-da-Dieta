@@ -251,7 +251,7 @@ O que isso representa?
 Agora, Maria obterá um consumo calórico menor, com maior
 consumo de proteínas e ferro e respeitando a quantidade mínima de nutrientes. Assim, atingimos nosso objetivo inicial de investigar a quantidade de cada alimento que Maria vai consumir e quanto de calorias vai ingerir de forma a respeitar todas as restrições impostas ao problema.
 
-## 3. Problema 7: Dieta Renal (Baixo Sódio)
+## 3. Abordagem
 Nesta abordagem, Maria está com problemas renais e necessita de uma dieta com a menor ingestão de sódio possível. Pretende-se investigar a quantidade de cada alimento que ela deve consumir para atingir os nutrientes necessários minimizando o sódio.
 Para isso, a função objetivo será:
 
@@ -293,7 +293,7 @@ Novas restrições adicionadas (Baseado no PDF e Código):
 - Cereais: $x_1 + x_7 \le 1$ 10
 - Leguminosas/Raízes: $x_4, x_6, x_{10} \le 1$ 11
 
-Observação: No PDF, as Nozes ($x_5$) ficaram com restrição livre ($x_5 \ge 0$)12, o que explica o resultado abaixo ainda conter muitas nozes. No seu código Python, você tentou adicionar uma restrição explícita para nozes (restricao_nozes), o que forçaria um resultado diferente, mas seguindo os dados resultantes do documento oficial:
+Observação: No PDF, as Nozes ($x_5$) ficaram com restrição livre ($x_5 \ge 0$)12, o que explica o resultado abaixo ainda conter muitas nozes. No código Python, foi adicionado uma restrição explícita para nozes (restricao_nozes), o que forçaria um resultado diferente, mas seguindo os dados resultantes do documento oficial:
 
 | Alimento        | Porção Ideal | Quantidade Total (g) |
 | --------------- | ------------ | -------------------- |
@@ -315,7 +315,7 @@ Sódio mínimo total = 0.0055 g
 
 O que isso representa?
 
-Ao adicionar as restrições de "máximo 1 porção" para a maioria dos grupos, houve uma ligeira diversificação (entrada de feijão e salada crua). No entanto, como as nozes têm baixíssimo sódio, alta caloria e alta proteína, e no modelo do PDF elas não foram limitadas a "1 porção" (apenas $x_5 \ge 0$), o algoritmo ainda as escolheu massivamente para bater a meta calórica sem estourar o sódio.O resultado mostra que, para uma dieta renal funcional, seria necessário forçar matematicamente o limite de nozes (como você fez no seu código Python com restricao_nozes) para evitar a repetição do problema de toxicidade por selênio15.
+Ao adicionar as restrições de "máximo 1 porção" para a maioria dos grupos, houve uma ligeira diversificação (entrada de feijão e salada crua). No entanto, como as nozes têm baixíssimo sódio, alta caloria e alta proteína, e no modelo do PDF elas não foram limitadas a "1 porção" (apenas $x_5 \ge 0$), o algoritmo ainda as escolheu massivamente para bater a meta calórica sem estourar o sódio. O resultado mostra que, para uma dieta renal funcional, seria necessário forçar matematicamente o limite de nozes (como feito no codigo, com restricao_nozes) para evitar a repetição do problema de toxicidade por selênio15.
 
 
 ### PDF
