@@ -311,7 +311,7 @@ Observação: No PDF, as Nozes ($x_5$) ficaram com restrição livre ($x_5 \ge 0
 | Atum Ralado     | 0.000000     | 0g                   |
 | Iogurte         | 0.000000     | 0g                   |
 
-Sódio mínimo total = 0.0055 g 14141414
+Sódio mínimo total = 0.0055 g 
 
 O que isso representa?
 
