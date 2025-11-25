@@ -251,9 +251,72 @@ O que isso representa?
 Agora, Maria obterá um consumo calórico menor, com maior
 consumo de proteínas e ferro e respeitando a quantidade mínima de nutrientes. Assim, atingimos nosso objetivo inicial de investigar a quantidade de cada alimento que Maria vai consumir e quanto de calorias vai ingerir de forma a respeitar todas as restrições impostas ao problema.
 
-## 3. Abordagem
+## 3. Problema 7: Dieta Renal (Baixo Sódio)
+Nesta abordagem, Maria está com problemas renais e necessita de uma dieta com a menor ingestão de sódio possível. Pretende-se investigar a quantidade de cada alimento que ela deve consumir para atingir os nutrientes necessários minimizando o sódio.
+Para isso, a função objetivo será:
 
-....a fazer
+<div align="center">Min Sódio = 0,276𝑥1 + 0,013𝑥2 + 0,0055𝑥3 + ... + 0,053𝑥13;</div>
+
+As restrições iniciais de nutrientes (Energia, Proteína, Cálcio, Ferro e Vitaminas) são mantidas como "maior ou igual" (mínimos necessários) nesta primeira etapa.
+
+3.1 Primeiro resultado (Problema 7.0)
+Rodando o código (ou observando a Tabela 4.5 do PDF) com apenas as restrições nutricionais básicas e minimizando o sódio, obtemos o seguinte resultado:
+
+| Alimentos       | Porção Ideal | Quantidade Total (g) |
+| --------------- | ------------ | -------------------- |
+| Pão Integral    | 0.000000     | 0g                   |
+| Queijo Cottage  | 0.000000     | 0g                   |
+| Mamão           | 1.000000     | 100g                 |
+| Nozes           | 19.649915    | 1964g                |
+| Salada Crua     | 0.000000     | 0g                   |
+| Feijão          | 0.000000     | 0g                   |
+| Arroz Integral  | 0.000000     | 0g                   |
+| Frango Grelhado | 0.000000     | 0g                   |
+| Maçã            | 0.000000     | 0g                   |
+| Tapioca         | 0.000000     | 0g                   |
+| Ovo             | 0.000000     | 0g                   |
+| Atum Ralado     | 0.000000     | 0g                   |
+| Iogurte         | 0.000000     | 0g                   |
+
+Sódio mínimo total: 0.005 g (aproximadamente) 
+
+Esta solução é aceitável? Matematicamente sim, pois o sódio é quase zero. No entanto, nutricionalmente não. Maria teria que ingerir quase 2 kg de nozes (19,64 porções). Embora o sódio seja baixo, o excesso de selênio (abundante nas nozes) pode causar reações adversas graves, como toxicidade, irritabilidade e fraqueza muscular. Além disso, a dieta carece de variedade.
+
+3.2 Segundo resultado (Problema 7.1)
+
+Para equilibrar essa dieta e evitar a toxicidade das nozes, novas restrições são inseridas no modelo. Além de limitar as porções, altera-se a lógica de alguns nutrientes para evitar excessos (Proteína e Cálcio tornam-se "Menor ou Igual", enquanto Ferro e Vitaminas e Energia mantêm-se ou ajustam-se para garantir mínimos).
+
+Novas restrições adicionadas (Baseado no PDF e Código):
+- Frutas: $x_3 + x_9 \le 1$ 7
+- Leite e Derivados: $x_2 + x_{13} \le 1$ 8
+- Proteínas (Carne, Ovos): $x_8 + x_{11} + x_{13} \le 1$ 9
+- Cereais: $x_1 + x_7 \le 1$ 10
+- Leguminosas/Raízes: $x_4, x_6, x_{10} \le 1$ 11
+
+Observação: No PDF, as Nozes ($x_5$) ficaram com restrição livre ($x_5 \ge 0$)12, o que explica o resultado abaixo ainda conter muitas nozes. No seu código Python, você tentou adicionar uma restrição explícita para nozes (restricao_nozes), o que forçaria um resultado diferente, mas seguindo os dados resultantes do documento oficial:
+
+| Alimento        | Porção Ideal | Quantidade Total (g) |
+| --------------- | ------------ | -------------------- |
+| Pão Integral    | 0.000000     | 0g                   |
+| Queijo Cottage  | 0.000000     | 0g                   |
+| Mamão           | 1.000000     | 100g                 |
+| Nozes           | 18.162430    | 1816g                |
+| Salada Crua     | 0.005376     | 0.5g                 |
+| Feijão          | 0.065322     | 6.5g                 |
+| Arroz Integral  | 0.000000     | 0g                   |
+| Frango Grelhado | 0.000000     | 0g                   |
+| Maçã            | 0.000000     | 0g                   |
+| Tapioca         | 0.000000     | 0g                   |
+| Ovo             | 0.000000     | 0g                   |
+| Atum Ralado     | 0.000000     | 0g                   |
+| Iogurte         | 0.000000     | 0g                   |
+
+Sódio mínimo total = 0.0055 g 14141414
+
+O que isso representa?
+
+Ao adicionar as restrições de "máximo 1 porção" para a maioria dos grupos, houve uma ligeira diversificação (entrada de feijão e salada crua). No entanto, como as nozes têm baixíssimo sódio, alta caloria e alta proteína, e no modelo do PDF elas não foram limitadas a "1 porção" (apenas $x_5 \ge 0$), o algoritmo ainda as escolheu massivamente para bater a meta calórica sem estourar o sódio.O resultado mostra que, para uma dieta renal funcional, seria necessário forçar matematicamente o limite de nozes (como você fez no seu código Python com restricao_nozes) para evitar a repetição do problema de toxicidade por selênio15.
+
 
 ### PDF
 
